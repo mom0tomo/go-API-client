@@ -11,10 +11,15 @@ func main() {
 	if err != nil {
 		fmt.Errorf("error: Cannot GET access")
 	}
-	defer resp.Body.Close()
+
+	Client(resp)
+}
+
+func Client(resp *http.Response) {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Errorf("error: Cannot read response body")
 	}
+	defer resp.Body.Close()
 	fmt.Printf("%s", body)
 }
